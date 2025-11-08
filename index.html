@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-Order Mini Pancake & Ice Jelang</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" 
+        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" 
+        crossorigin="anonymous" 
+        referrerpolicy="no-referrer">
+    </script>
+    
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <style>
+      
+      :root {
+        --primary-yellow: #e8e2cf;
+        --secondary-orange: #574330; 
+        --dark-text: #2c3e50; 
+        --light-bg: #FFFACD; 
+        --accent-blue: #4a93b0; 
+        --accent-green: #2ecc71; 
+        --accent-pink: #efa451; 
+      }
+
+      body {
+        font-family: 'Poppins', sans-serif;
+        color: var(--dark-text);
+        background-color: var(--light-bg);
+        overflow-x: hidden;
+      }
+
+      .section-padding {
+        padding: 6rem 1rem; 
+      }
+      @media (min-width: 1024px) {
+        .section-padding {
+          padding: 8rem 4rem; 
+        }
+      }
+
+      .card-fancy {
+        border: 3px solid var(--dark-text);
+        box-shadow: 8px 8px var(--secondary-orange);
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        position: relative;
+        overflow: hidden;
+      }
+      .card-fancy:hover {
+        transform: translateY(-4px) scale(1.01); 
+        box-shadow: 10px 10px var(--primary-yellow);
+      }
+
+      .btn-fancy {
+        border: 2px solid var(--dark-text);
+        box-shadow: 5px 5px var(--dark-text);
+        background-color: var(--primary-yellow);
+        color: var(--dark-text) !important;
+        transition: all 0.3s ease-in-out;
+      }
+      .btn-fancy:hover {
+        box-shadow: 7px 7px var(--accent-blue);
+        background-color: var(--secondary-orange);
+        color: white !important;
+        transform: translateY(-2px);
+      }
+
+      .btn-fancy-secondary {
+        border: 2px solid var(--dark-text);
+        box-shadow: 5px 5px var(--dark-text);
+        background-color: var(--dark-text);
+        color: var(--light-bg) !important;
+        transition: all 0.3s ease-in-out;
+      }
+      .btn-fancy-secondary:hover {
+        box-shadow: 7px 7px var(--accent-pink);
+        background-color: #555;
+        transform: translateY(-2px);
+      }
+      
+      .btn-fancy-whatsapp {
+        background-color: var(--accent-green) !important;
+        color: white !important;
+        box-shadow: 5px 5px #007010;
+        border-color: var(--dark-text) !important;
+      }
+      .btn-fancy-whatsapp:hover {
+        box-shadow: 7px 7px var(--accent-green);
+        background-color: #27ae60 !important;
+      }
+
+      .menu-photo {
+        width: 100%;
+        height: auto; 
+        border-radius: 8px;
+        margin-bottom: 1rem;
+      }
+      .menu-item-card {
+          background-color: white;
+          padding: 1rem;
+          margin-bottom: 0.75rem;
+          border-left: 5px solid var(--secondary-orange);
+          box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+      }
+      .menu-item-card input[type="number"] {
+        width: 65px;
+        text-align: center;
+        border: 1px solid var(--dark-text);
+        border-radius: 5px;
+        padding: 5px;
+      }
+      
+      .order-summary-box {
+          border: 3px solid var(--dark-text);
+          border-radius: 10px;
+          background-color: white;
+      }
+      .detail-row {
+          display: flex;
+          justify-content: space-between;
+          padding: 5px 0;
+          border-bottom: 1px dotted #ccc;
+      }
+      .total-area {
+          border-top: 3px solid var(--dark-text);
+          padding-top: 10px;
+          margin-top: 15px;
+          font-size: 1.5rem;
+          font-weight: bold;
+      }
+      
+      .hidden {
+        display: none;
+      }
+      #pdf-content, 
+      #buyer-details, 
+      #order-details, 
+      .total-area {
+        visibility: visible !important;
+        opacity: 1 !important;
+        display: block !important;
+        position: static !important; 
+      }
+
+        #pdf-content {
+        width: 100%;
+        max-width: 800px; 
+        overflow: visible !important;
+        height: auto !important;
+        page-break-inside: auto;
+        }
+
+        #pdf-content * {
+        page-break-inside: avoid;
+        }
+
+
+    </style>
+  </head>
+
+  <body class="font-poppins antialiased text-dark-text bg-light-bg">
+    
+    <div class="container mx-auto px-4 lg:px-8 section-padding min-h-screen flex items-start justify-center">
+        
+        <div class="w-full max-w-2xl">
+            <section id="menu-section" class="card-fancy p-6 md:p-8 bg-white/90">
+                <h1 class="text-5xl font-extrabold text-center mb-6"><i class="ri-shopping-cart-2-line"></i> Pre-Order Menu</h1>
+                <p class="text-center text-gray-600 mb-8">Pesan Mini Pancake dan Ice Jelang dengan design terbaik!</p>
+
+                <h2 class="text-2xl font-bold mb-4 border-b-2 border-primary-yellow pb-2">Data Pembeli</h2>
+                <div class="space-y-4 mb-8">
+                    <input type="text" id="nama" class="form-control" placeholder="Nama Lengkap" required>
+                    <input type="tel" id="hp" class="form-control" placeholder="Nomor HP (WhatsApp)" required>
+                    
+                    <div class="p-3 border rounded bg-light-bg">
+                        <label class="font-semibold mb-2 block">Jurusan:</label>
+                        <div class="row g-2">
+                            <div class="col-6 col-md-3">
+                                <input type="radio" class="btn-check" id="jurusan-sisfor" name="jurusan" value="Sisfor" required>
+                                <label class="btn btn-outline-dark w-100" for="jurusan-sisfor">Sisfor</label>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <input type="radio" class="btn-check" id="jurusan-dkv" name="jurusan" value="DKV">
+                                <label class="btn btn-outline-dark w-100" for="jurusan-dkv">DKV</label>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <input type="radio" class="btn-check" id="jurusan-ti" name="jurusan" value="TI">
+                                <label class="btn btn-outline-dark w-100" for="jurusan-ti">TI</label>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <input type="radio" class="btn-check" id="jurusan-tektel" name="jurusan" value="TekTel">
+                                <label class="btn btn-outline-dark w-100" for="jurusan-tektel">TekTel</label>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="text" id="kelas-angka" class="form-control" placeholder="Contoh: 23-001" required>
+                </div>
+
+                <h2 class="text-2xl font-bold mb-4 border-b-2 border-secondary-orange pb-2">Pilih Menu</h2>
+                
+                <div class="space-y-6">
+                    
+                    <div class="p-4 border-2 border-dashed border-primary-yellow rounded-lg bg-light-bg/50">
+                        <img src="2.png" alt="Mini Pancake" class="menu-photo" id="img-pancake-placeholder">
+                        <div class="text-center text-sm text-gray-500 mb-3"></div>
+
+                        <div class="menu-item-card d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="text-lg font-semibold"><i class="ri-cake-3-line"></i> Mini Pancake - Icing Sugar</h5>
+                                <small class="text-gray-700">Rp 10.000</small>
+                            </div>
+                            <input type="number" min="0" value="0" id="qty-pancake-icing" data-price="10000">
+                        </div>
+
+                        <div class="menu-item-card d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="text-lg font-semibold"><i class="ri-cake-3-line"></i> Mini Pancake - Oreo Crumble</h5>
+                                <small class="text-gray-700">Rp 12.000</small>
+                            </div>
+                            <input type="number" min="0" value="0" id="qty-pancake-oreo" data-price="12000">
+                        </div>
+
+                        <div class="menu-item-card d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="text-lg font-semibold"><i class="ri-cake-3-line"></i> Mini Pancake - Chocolate</h5>
+                                <small class="text-gray-700">Rp 12.000</small>
+                            </div>
+                            <input type="number" min="0" value="0" id="qty-pancake-choco" data-price="12000">
+                        </div>
+                    </div>
+
+                    <div class="p-4 border-2 border-dashed border-primary-yellow rounded-lg bg-light-bg/50">
+                        <img src="3.png" alt="Ice Jelang" class="menu-photo" id="img-jelang-placeholder">
+                        <div class="text-center text-sm text-gray-500 mb-3"></div>
+                        
+                        <div class="menu-item-card d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="text-lg font-semibold"><i class="ri-cup-line"></i> Ice Jelang</h5>
+                                <small class="text-gray-700">Rp 10.000</small>
+                            </div>
+                            <input type="number" min="0" value="0" id="qty-ice-jelang" data-price="10000">
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <button id="lanjut-button" class="btn-fancy w-full mt-8 px-10 py-4 rounded-xl font-bold text-xl hover:scale-105 transition-transform duration-300">
+                    Lanjutkan ke Detail Pesanan <i class="ri-arrow-right-line ml-2"></i>
+                </button>
+            </section>
+            
+            <section id="detail-section" class="hidden">
+                
+                <div class="order-summary-box p-6 md:p-8 bg-white/90">
+                    <div id="pdf-content">
+                        <h2 class="text-4xl font-extrabold text-center mb-6">📝 Rincian Pesanan</h2>
+                        
+                        <h3 class="text-xl font-bold border-b pb-1 mb-2">Info Pembeli:</h3>
+                        <div id="buyer-details" class="p-3 mb-4 bg-light-bg rounded">
+                            </div>
+
+                        <h3 class="text-xl font-bold border-b pb-1 mb-2">Daftar Menu:</h3>
+                        <div id="order-details" class="mb-3 space-y-2">
+                            </div>
+
+                        <div class="total-area text-right">
+                            <span class="text-base font-semibold">Total Pembayaran:</span> 
+                            <span id="grand-total" class="text-secondary-orange ml-2">Rp 0</span>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="action-buttons mt-4 space-y-3">
+                    <button id="download-button" class="btn-fancy-secondary w-full px-8 py-3 rounded-xl font-bold text-lg">
+                        <i class="ri-file-pdf-line me-2"></i> Download Detail Menu (PDF)
+                    </button>
+                    
+                    <a id="whatsapp-link" href="#" target="_blank" class="btn-fancy btn-fancy-whatsapp w-full px-8 py-3 rounded-xl font-bold text-lg d-flex justify-content-center align-items-center">
+                        <i class="ri-whatsapp-line text-2xl me-2"></i> Kirim Pesanan via WhatsApp
+                    </a>
+                </div>
+                
+                <button id="kembali-button" class="btn-fancy w-full mt-4 px-10 py-4 rounded-xl font-bold text-lg hover:scale-105 transition-transform duration-300">
+                    <i class="ri-arrow-left-line mr-2"></i> Kembali ke Menu
+                </button>
+            </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
