@@ -82,14 +82,14 @@ document.addEventListener('DOMContentLoaded', function() {
         grandTotalSpan.textContent = formatRupiah(total);
         
         const waBuyerInfo = `
-*Data Pembeli:*
-Nama: ${nama}
-HP: ${hp}
-Kelas: ${jurusan} ${kelasAngka}
-----------------------
-`;
+        Halo Minbloom, saya *${nama}* telah melakukan pembayaran pesanan.\n\n` +
+        `*Data Pembeli:*\n` +
+        `Nama: ${nama}\n` +
+        `HP: ${hp}\n` +
+        `Jurusan/Kelas: ${jurusan} ${kelasAngka}\n\n`;
+
         whatsappText = waBuyerInfo + "*Detail Pesanan:*\n" + whatsappText;
-        whatsappText += `\n*TOTAL HARGA:* ${formatRupiah(total)}\n\nMohon siapkan screenshot/file PDF. Terima kasih.`;
+        whatsappText += `\n*TOTAL HARGA:* ${formatRupiah(total)}\n\nBerikut bukti transfer QRIS saya👇🏻. Terima kasih.`;
 
         const encodedText = encodeURIComponent(whatsappText);
         whatsappLink.href = `https://wa.me/${WA_NUMBER}?text=${encodedText}`;
